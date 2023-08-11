@@ -1,3 +1,5 @@
+import React from "react";
+import ReactDOM from "react-dom/client";
 // Using Vanilla Javascript
 // const heading = document.createElement('h1');
 //       heading.innerHTML = 'Hellow World from Vanilla Javascript!!!';
@@ -17,13 +19,13 @@
 // </div>
 
 const parent = React.createElement("div", { id: "parent", abc: "xyz" }, [
-  React.createElement("div", { id: "child1" }, [
-    React.createElement("h1", {}, "I am a h1 tag."),
-    React.createElement("h2", {}, "I am a h2 tag"),
+  React.createElement("div", { id: "child1", key: "1" }, [
+    React.createElement("h1", { key: "1" }, "I am a h1 tag."),
+    React.createElement("h2", { key: "2" }, "I am a h2 tag"),
   ]),
-  React.createElement("div", { id: "child2" }, [
-    React.createElement("h1", {}, "I am a h1 tag."),
-    React.createElement("h2", {}, "I am a h2 tag"),
+  React.createElement("div", { id: "child2", key: "2" }, [
+    React.createElement("h1", { key: "1" }, "I am a h1 tag."),
+    React.createElement("h2", { key: "2" }, "I am a h2 tag"),
   ]),
 ]);
 

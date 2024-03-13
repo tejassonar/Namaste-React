@@ -2,14 +2,26 @@ import { useState, useEffect } from "react";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import useOnlineStatus from "../utils/Hooks/useOnlineStatus";
+import useDebounce from "../utils/Hooks/useDebounce";
+
 const Body = () => {
   const [restaurantList, setRestaurantList] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
 
+  const searchQuery = useDebounce(searchText);
+
   useEffect(() => {
     fetchRestaurants();
   }, []);
+
+  useEffect(() => {
+    console.log("123123");
+    const newList = restaurantList?.filter((restaurant) =>
+      restaurant.info.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredRestaurants(newList);
+  }, [searchQuery]);
 
   const fetchRestaurants = async () => {
     try {
@@ -44,40 +56,35 @@ const Body = () => {
   //   return <Shimmer />;
   // }
   return (
-    <div className="body">
-      <div className="search">
-        <input
-          type="text"
-          value={searchText}
-          onChange={(e) => {
-            setSearchText(e.target.value);
-          }}
-        />
+    <div className="flex flex-col">
+      <div className="flex items-center my-8 justify-center">
+        <div className="">
+          <input
+            type="text"
+            className="border-slate-300 text-slate-500 border-[1px] text-xl rounded-2xl w-[500px] placeholder:text-slate-300 placeholder:font-light bg-slate-50 focus:outline-[#eeb8ac] focus:outline-[1px] focus:bg-white pl-4 py-1"
+            value={searchText}
+            placeholder="Search Restaurants"
+            onChange={(e) => {
+              setSearchText(e.target.value);
+            }}
+          />
+          {/* <button onClick={() => {}}>Search</button> */}
+        </div>
         <button
           onClick={() => {
-            const newList = restaurantList?.filter((restaurant) =>
-              restaurant.info.name
-                .toLowerCase()
-                .includes(searchText.toLowerCase())
+            const newList = restaurantList?.filter(
+              (restaurant) => restaurant.info.avgRating > 4
             );
             setFilteredRestaurants(newList);
           }}
+          className="px-4 py-2 mx-8  self-start rounded-md text-white font-semibold bg-[#f55733] shadow-md"
         >
-          Search
+          Top Rated Restaurants
         </button>
       </div>
-      <button
-        onClick={() => {
-          const newList = restaurantList?.filter(
-            (restaurant) => restaurant.info.avgRating > 4
-          );
-          setFilteredRestaurants(newList);
-        }}
-      >
-        Top Rated Restaurants
-      </button>
+
       {restaurantList?.length > 0 ? (
-        <div className="res-container">
+        <div className="flex flex-wrap justify-center">
           {/* <RestaurantCard restaurant={{name:'Healthy Bites'}}/> */}
           {filteredRestaurants?.map((restaurant) => (
             <RestaurantCard restaurant={restaurant} key={restaurant.info.id} />

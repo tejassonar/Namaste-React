@@ -9,18 +9,11 @@ class AboutUs extends React.Component {
   // }, []);
   render() {
     return (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          width: "100%",
-        }}
-      >
+      <div className="flex flex-col">
         {/* <h1 style={{ position: "absolute" }} ref={headRef}>
         AboutUs
       </h1> */}
-        <h1>AboutUs</h1>
+        <h1 className="text-xl font-semibold my-10 self-center">About Us</h1>
         <AboutClass />
       </div>
     );

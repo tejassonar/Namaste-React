@@ -1,28 +1,28 @@
 import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
-import Header from "./components/Header";
-import Body from "./components/Body";
+import Header from "./src/components/Header";
+import Body from "./src/components/Body";
 // import Grocery from "./components/Grocery";
-import Error from "./components/Error";
+import Error from "./src/components/Error";
 // import AboutUs from "./components/AboutUs";
-import ContactUs from "./components/ContactUs";
-import RestaurantMenu from "./components/RestaurantMenu";
-import Cart from "./components/Cart";
+import ContactUs from "./src/components/ContactUs";
+import RestaurantMenu from "./src/components/RestaurantMenu";
+import Cart from "./src/components/Cart";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 
 const AppLayout = () => {
   return (
     <div className="app">
       <Header />
-      <div className="center">
+      <div className="flex justify-center items-center">
         <Outlet />
       </div>
     </div>
   );
 };
 
-const Grocery = lazy(() => import("./components/Grocery"));
-const AboutUs = lazy(() => import("./components/AboutUs"));
+const Grocery = lazy(() => import("./src/components/Grocery"));
+const AboutUs = lazy(() => import("./src/components/AboutUs"));
 
 const router = createBrowserRouter([
   {

@@ -27,32 +27,29 @@ class AboutClass extends React.Component {
     const { count1, count2 } = this.state;
 
     return (
-      <div className="contact">
+      <div className="p-4 px-12 shadow-lg">
         <img
           src={profilePhoto}
-          style={{
-            width: 150,
-            height: 150,
-            borderRadius: 10,
-            marginRight: 30,
-          }}
+          className="w-[200] h-[200] rounded-xl"
           alt="profile_pic.jpg"
         />
-        <div>
-          <h3>Name: {name}</h3>
-          <h5>Role: {bio}</h5>
-          <h5>Location: {location}</h5>
-          <h5>Count: {count1}</h5>
+        <div className="pt-4">
+          <h3 className="text-lg font-medium">Name: {name}</h3>
+          <h5 className="text-md font-normal my-1">Role: {bio}</h5>
+          <h5 className="text-md font-normal my-1">Location: {location}</h5>
+          <h5 className="text-md font-normal my-1">Count: {count1}</h5>
           <button
             onClick={() => {
               this.setState({
                 count1: this.state.count1 + 1,
               });
             }}
+            className="border-[1px] px-1 w-8 h-8 border-black rounded-sm mr-2 "
           >
             +
           </button>
           <button
+            className="border-[1px] px-1 w-8 h-8 border-black rounded-sm ml-2"
             onClick={() => {
               this.setState({
                 count1: this.state.count1 - 1,

@@ -30,13 +30,8 @@ const RestaurantMenu = () => {
       ?.card;
 
   return (
-    <div
-      style={{
-        width: "70%",
-        marginTop: "20px",
-      }}
-    >
-      <div style={{ display: "flex" }}>
+    <div className="flex flex-col w-[70%] mt-5 ">
+      <div className="flex shadow-lg rounded-2xl m-4">
         <img
           src={`${CDN_URL}/${cloudinaryImageId}`}
           style={{
@@ -44,27 +39,27 @@ const RestaurantMenu = () => {
             height: "200px",
             objectFit: "cover",
             borderRadius: "16px",
-            margin: "20px",
           }}
         />
-        <div>
-          <h1>{name}</h1>
-          <p>{cuisines.join(", ")}</p>
-          <p>
+        <div className="pl-6">
+          <h1 className="font-bold text-2xl">{name}</h1>
+          <p className="text-md text-slate-500 mt-1">{cuisines.join(", ")}</p>
+          <p className="text-md text-slate-500 mt-1">
             {sla.slaString} - {costForTwoMessage}
           </p>
         </div>
       </div>
 
-      <div style={{ margin: "20px" }}>
-        <h3>Menu</h3>
-        <ul style={{ padding: 0 }}>
+      <div className="m-5">
+        <h3 className="font-bold text-2xl pl-2">Menu</h3>
+        <ul className="flex flex-wrap">
           {itemCards &&
             itemCards.map((item) => {
               return (
                 <li
                   key={item?.card?.info?.id}
                   style={{ listStyle: "none", display: "flex", margin: "8px" }}
+                  className=" w-[47.5%] shadow-md rounded-md"
                 >
                   <img
                     src={`${CDN_URL}/${item?.card?.info?.imageId}`}

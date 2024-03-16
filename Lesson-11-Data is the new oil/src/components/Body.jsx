@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { OfferRestaurantCard } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import useOnlineStatus from "../utils/Hooks/useOnlineStatus";
 import useDebounce from "../utils/Hooks/useDebounce";
@@ -21,6 +21,8 @@ const Body = () => {
     );
     setFilteredRestaurants(newList);
   }, [searchQuery]);
+
+  const RestaurantCardWithOffer = OfferRestaurantCard(RestaurantCard);
 
   const fetchRestaurants = async () => {
     try {
@@ -67,7 +69,6 @@ const Body = () => {
               setSearchText(e.target.value);
             }}
           />
-          {/* <button onClick={() => {}}>Search</button> */}
         </div>
         <button
           onClick={() => {
@@ -80,14 +81,25 @@ const Body = () => {
         >
           Top Rated Restaurants
         </button>
+        {/* <button onClick={() => {}}>Search</button> */}
       </div>
 
       {restaurantList?.length > 0 ? (
         <div className="flex flex-wrap justify-center">
           {/* <RestaurantCard restaurant={{name:'Healthy Bites'}}/> */}
-          {filteredRestaurants?.map((restaurant) => (
-            <RestaurantCard restaurant={restaurant} key={restaurant.info.id} />
-          ))}
+          {filteredRestaurants?.map((restaurant) =>
+            restaurant?.info?.aggregatedDiscountInfoV3?.header ? (
+              <RestaurantCardWithOffer
+                restaurant={restaurant}
+                key={restaurant.info.id}
+              />
+            ) : (
+              <RestaurantCard
+                restaurant={restaurant}
+                key={restaurant.info.id}
+              />
+            )
+          )}
         </div>
       ) : (
         <Shimmer />
